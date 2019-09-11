@@ -1,12 +1,17 @@
 (ns scheduler.core
   (:require [scheduler.utils :as utils]
+            [clojure.string :as string]
             [clojure.pprint :as pprint]
             [clojure.java.io :as io])
   (:gen-class))
 
 
+(defn get-next-job-run
+  [time line]
+  [time line])
+
 (defn process-line
-  [line]
+  [time line]
   (cond
     (= "exit" line)
     (System/exit 0)
@@ -28,4 +33,4 @@
       ; read input
       (with-open [reader (io/reader *in*)]
         (println "Please insert your input:")
-        (doall (map process-line (line-seq reader)))))))
+        (doall (map (partial process-line time) (line-seq reader)))))))
