@@ -7,8 +7,14 @@
 
 (defn process-line
   [line]
-  (if (= "exit" line)
+  (cond
+    (= "exit" line)
     (System/exit 0)
+
+    (nil? (utils/validate-line line))
+    (println (str "The following line has an invalid format: " line " - format should be 'MM|* HH|* <path/to/script>'"))
+
+    :default
     (println line)))
 
 (defn -main
