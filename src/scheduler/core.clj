@@ -55,7 +55,7 @@
     (println (str "The following line has an invalid format: " line " - format should be 'MM|* HH|* <path/to/script>'"))
 
     :default
-    (println line)))
+    (get-next-job-run time line)))
 
 (defn -main
   "I don't do a whole lot ... yet."

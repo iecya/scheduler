@@ -22,8 +22,6 @@
         (let [line-idx (.indexOf lines line)
               result (sc/process-line time line)
               output (nth output-lines line-idx)]
-          (is (= (nth output-lines line-idx) result))
-          (println "Output: " output)
-          (println "Result: " result)
-          #_(when-not (= (nth output-lines line-idx) result)
+          (is (= output result))
+          (when-not (= output result)
               (println "Error line at index: " line-idx " - line: " line)))))))
