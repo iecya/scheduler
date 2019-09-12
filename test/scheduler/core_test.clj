@@ -33,7 +33,7 @@
            "12:45 today - /bin/run_me_hourly"))
 
     (is (= (get-next-job-run "13:36" "* * /bin/run_me_every_minute")
-           "13:36 today - /bin/run_me_daily"))
+           "13:36 today - /bin/run_me_every_minute"))
 
     (is (= (get-next-job-run "18:15" "* 19 /bin/run_me_sixty_times")
            "19:00 today - /bin/run_me_sixty_times"))

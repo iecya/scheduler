@@ -8,7 +8,12 @@
 
 (defn get-next-job-run
   [time line]
-  [time line])
+  (let [[MM HH script] (string/split line #" ")]
+    (cond
+      (and (utils/star? MM) (utils/star? HH))
+      (str time " today - " script)
+
+      :else [time line])))
 
 (defn process-line
   [time line]
@@ -31,6 +36,5 @@
       (println "Please input a valid time in HH:MM format")
 
       ; read input
-      (with-open [reader (io/reader *in*)]
-        (println "Please insert your input:")
-        (doall (map (partial process-line time) (line-seq reader)))))))
+      (doseq [line (line-seq (io/reader *in*))]
+        (process-line time line)))))
