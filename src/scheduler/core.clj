@@ -43,7 +43,7 @@
       (and (utils/num? MM) (utils/num? HH))
       (num-num->output (utils/split-time time) HH MM script)
 
-      :else [time line])))
+      :else (str "Cannot process line: " line " - current time set to " time))))
 
 (defn process-line
   [time line]
