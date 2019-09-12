@@ -35,11 +35,11 @@ or
 ```
 lein run <time>
 ```
-The last command will start the application and allow the user to manually input Cron schedules; to exit the application just input `exit`
+The last command will start the application and allow the user to manually input Cron schedules; to exit the application just input `exit` or press `CTRL + C`
 
 ### Tests
 
-It is possible to test the application against custom inputs. To do so, create a file in `resources/inputs` with the `input` word in the name, containing a time input in the first line (in the HH:MM format), followed by a list of Cron schedules; then create a file in the `resources/outputs` with a name matching the correspondent input file (just replace `input` with `output`) containing a list of expected output.
+It is possible to test the application against custom inputs. To do so, create a file in `resources/inputs` with the `input` word in the name, containing a time input in the first line, followed by a list of Cron schedules; then create a file in the `resources/outputs` with a name matching the correspondent input file (just replace `input` with `output`) containing a list of expected output.
 Formats and examples below:
 
 Time format
