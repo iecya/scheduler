@@ -5,16 +5,14 @@
             [clojure.java.io :as io])
   (:gen-class))
 
-
-
-(defn star-num->output
+(defn- star-num->output
   [[hh mm] HH script]
   (let [day (if (> (Integer. hh) (Integer. HH)) "tomorrow" "today")]
     (if (= hh HH)
       (utils/format-output (str HH ":" mm) day script)
       (utils/format-output (str HH ":00") day script))))
 
-(defn num-star->output
+(defn- num-star->output
   [[hh mm] MM script]
   (let [today? (or (<= (Integer. mm) (Integer. MM)) (< (Integer. hh) 23))
         hour (if (> (Integer. hh) 22) "00" (inc (Integer. hh)))]
@@ -22,26 +20,12 @@
       (utils/format-output (str hh ":" MM) "today" script)
       (utils/format-output (str hour ":" MM) (if today? "today" "tomorrow") script))))
 
-(defn num-num->output
-  [[hh-str mm-str] HH-str MM-str script]
-  (let [hh (Integer. hh-str)
-        mm (Integer. mm-str)
-        HH (Integer. HH-str)
-        MM (Integer. MM-str)]
-    (cond
-      (< hh HH)
-      (utils/format-output (str HH ":" MM) "today" script)
-
-      (and (= hh HH)
-           (<= mm MM))
-      (utils/format-output (str HH ":" MM) "today" script)
-
-      (> hh HH)
-      (utils/format-output (str HH ":" MM) "tomorrow" script)
-
-      (and (= hh HH)
-           (> mm MM))
-      (utils/format-output (str HH ":" MM) "tommorow" script))))
+(defn- num-num->output
+  [[hh mm] HH MM script]
+  (let [today? (or (< (Integer. hh) (Integer. HH))
+                   (and (= (Integer. hh) (Integer. HH))
+                        (<= (Integer. mm) (Integer. MM))))]
+    (utils/format-output (str HH ":" MM) (if today? "today" "tomorrow") script)))
 
 (defn get-next-job-run
   [time line]
