@@ -45,4 +45,7 @@
            "19:17 today - /bin/run_me_sixty_times"))
 
     (is (= (get-next-job-run "00:00" "30 1 /bin/run_me_daily")
-           "1:30 today - /bin/run_me_daily"))))
+           "1:30 today - /bin/run_me_daily"))
+
+    (is (= (get-next-job-run "13:15" "30 1 /bin/run_me_daily")
+           "1:30 tomorrow - /bin/run_me_daily"))))
