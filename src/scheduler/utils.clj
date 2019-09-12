@@ -7,7 +7,7 @@
 
 (defn validate-line
   [line]
-  (when (seq line) (re-matches #"([0-5][0-9]|\*)\s([0-1][0-9]|2[0-3]|\*)\s/bin/(\w+)" line)))
+  (when (seq line) (re-matches #"([0-5][0-9]|\*)\s(2[0-3]|1[0-9]|[1-9]|\*)\s/bin/(\w+)" line)))
 
 (defn star?
   [value]

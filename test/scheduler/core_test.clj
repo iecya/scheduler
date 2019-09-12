@@ -1,7 +1,9 @@
 (ns scheduler.core-test
   (:require [clojure.test :refer :all]
             [scheduler.core :refer :all]
-            [scheduler.utils :as utils]))
+            [scheduler.utils :as utils]
+            [clojure.java.io :as io]
+            [scheduler.test-utils :as test-utils]))
 
 (deftest time-input-test
   (testing "Given a time input, verifies it is in the valid format"
@@ -49,3 +51,9 @@
 
     (is (= (get-next-job-run "13:15" "30 1 /bin/run_me_daily")
            "1:30 tomorrow - /bin/run_me_daily"))))
+
+
+(deftest lines-processing
+  (let [input-files (test-utils/get-input-files)]
+    (doseq [in-file input-files]
+      (test-utils/test-file in-file))))
