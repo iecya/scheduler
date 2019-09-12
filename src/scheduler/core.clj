@@ -66,7 +66,5 @@
       (println "Please input a valid time in HH:MM format")
 
       ; read input
-      (do
-        (println "Ready to process input(s)")
-        (doseq [line (line-seq (io/reader *in*))]
-          (println (process-line time line)))))))
+      (doseq [line (line-seq (io/reader *in*))]
+             (println (process-line time line))))))
