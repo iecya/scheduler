@@ -1,0 +1,4 @@
+1:30 tomorrow - /bin/run_me_daily
+20:45 today - /bin/run_me_hourly
+19:50 today - /bin/run_me_every_minute
+19:50 today - /bin/run_me_sixty_times
