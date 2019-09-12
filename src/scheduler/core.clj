@@ -8,19 +8,11 @@
 
 
 (defn star-num->output
-  [[hh-str mm] HH-str script]
-  (let [HH (Integer. HH-str)
-        hh (Integer. hh-str)]
-    (cond
-      (= hh HH)
-      (utils/format-output (str HH-str ":" mm) "today" script)
-
-      (< hh HH)
-      (utils/format-output (str HH-str ":00") "today" script)
-
-      (> hh HH)
-      (utils/format-output (str HH-str ":00") "tomorrow" script))))
-
+  [[hh mm] HH script]
+  (let [day (if (> (Integer. hh) (Integer. HH)) "tomorrow" "today")]
+    (if (= hh HH)
+      (utils/format-output (str HH ":" mm) day script)
+      (utils/format-output (str HH ":00") day script))))
 
 (defn get-next-job-run
   [time line]
