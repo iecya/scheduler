@@ -1,4 +1,5 @@
-(ns scheduler.utils)
+(ns scheduler.utils
+  (:require [clojure.string :as string]))
 
 (defn validate-time-input
   [input]
@@ -11,3 +12,15 @@
 (defn star?
   [value]
   (= "*" value))
+
+(defn num?
+  [value]
+  (not (star? value)))
+
+(defn format-output
+  [time day script]
+  (str time " " day " - " script))
+
+(defn split-time
+  [time]
+  (string/split time #":"))

@@ -6,12 +6,31 @@
   (:gen-class))
 
 
+
+(defn star-num->output
+  [[hh-str mm] HH-str script]
+  (let [HH (Integer. HH-str)
+        hh (Integer. hh-str)]
+    (cond
+      (= hh HH)
+      (utils/format-output (str HH-str ":" mm) "today" script)
+
+      (< hh HH)
+      (utils/format-output (str HH-str ":00") "today" script)
+
+      (> hh HH)
+      (utils/format-output (str HH-str ":00") "tomorrow" script))))
+
+
 (defn get-next-job-run
   [time line]
   (let [[MM HH script] (string/split line #" ")]
     (cond
       (and (utils/star? MM) (utils/star? HH))
       (str time " today - " script)
+
+      (and (utils/star? MM) (utils/num? HH))
+      (star-num->output (utils/split-time time) HH script)
 
       :else [time line])))
 
