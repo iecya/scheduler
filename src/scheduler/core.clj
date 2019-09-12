@@ -14,6 +14,23 @@
       (utils/format-output (str HH ":" mm) day script)
       (utils/format-output (str HH ":00") day script))))
 
+(defn num-star->output
+  [[hh-str mm-str] MM-str script]
+  (let [hh (Integer. hh-str)
+        mm (Integer. mm-str)
+        MM (Integer. MM-str)]
+    (cond
+      (<= mm MM)
+      (utils/format-output (str hh-str ":" MM-str) "today" script)
+
+      (and (> mm MM)
+           (> hh 22))
+      (utils/format-output (str "00:" MM-str) "tomorrow" script)
+
+      (and (> mm MM)
+           (< hh 23))
+      (utils/format-output (str (inc hh) ":" MM-str) "today" script))))
+
 (defn get-next-job-run
   [time line]
   (let [[MM HH script] (string/split line #" ")]
@@ -23,6 +40,9 @@
 
       (and (utils/star? MM) (utils/num? HH))
       (star-num->output (utils/split-time time) HH script)
+
+      (and (utils/num? MM) (utils/star? HH))
+      (num-star->output (utils/split-time time) MM script)
 
       :else [time line])))
 
